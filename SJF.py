@@ -1,4 +1,6 @@
 # process = [burst_time , arrival_time , process_id]
+
+t_list = []
 def sjf(processesList):
     t=0
     ganttChart=[]
@@ -13,6 +15,7 @@ def sjf(processesList):
             t+=1
 
         else:
+            t_list.append(t)
             availableProcesses.sort()
             process = availableProcesses[0]
             burstTime = process[0]
@@ -25,6 +28,8 @@ def sjf(processesList):
             responseTime = waitingTime #responseTime always equal to waitingTime
             completedProcesses[process_id]=[responseTime,turnaroundTime,waitingTime]
             processesList.remove(process)
+
+    t_list.append(t)
 
     return completedProcesses
 
@@ -62,6 +67,7 @@ if __name__ == "__main__":
 
     print("\nAverages: [Response Avg, Turnaround Avg, Waiting Avg]")
     print(averages)
+    print(t_list)
 
 #processList=[[6,2,"p1"],[2,5,"p2"],[8,1,"p3"],[3,0,"p4"],[4,4,"p5"]]
 #processList = [[1, 0, "p1"], [4, 1, "p2"], [7, 2, "p3"], [5, 3, "p4"]]
